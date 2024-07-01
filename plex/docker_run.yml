@@ -1,0 +1,13 @@
+docker run \
+  -d \
+  --name plex \
+  --network=host \
+  -e TZ="Europe/Athens" \
+  -e PLEX_CLAIM="claim-TamTiiMTpi4zV9YijxyB" \
+  -v /mnt/omv/Plex/Movies/:/mnt/omv/Movies \
+  -v /mnt/omv/Plex/Series/:/mnt/omv/Series \
+  -v /mnt/omv/Plex/Anime/:/mnt/omv/Anime \
+  -v /home/christos/plex/database:/config \
+  -v /home/christos/plex/transcode:/transcode \
+  -v /home/christos/plex/media:/data \
+  plexinc/pms-docker
