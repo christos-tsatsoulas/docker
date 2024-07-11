@@ -10,4 +10,5 @@ docker run \
   -v /home/christos/plex/database:/config \
   -v /home/christos/plex/transcode:/transcode \
   -v /home/christos/plex/media:/data \
+  --restart unless-stopped \
   plexinc/pms-docker

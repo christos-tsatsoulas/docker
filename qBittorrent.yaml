@@ -1,0 +1,39 @@
+export \
+  QBT_EULA=accept \
+  QBT_VERSION=latest \
+  QBT_WEBUI_PORT=8080 \
+  QBT_CONFIG_PATH="/home/christos/qbittorrent/config" \
+  QBT_DOWNLOADS_PATH="/mnt/omv/Downloads"
+docker run \
+  -d \
+  --name qbittorrent-nox \
+  --read-only \
+  --rm \
+  --stop-timeout 1800 \
+  --tmpfs /tmp \
+  -e QBT_EULA \
+  -e QBT_WEBUI_PORT \
+  -p "$QBT_WEBUI_PORT":"$QBT_WEBUI_PORT"/tcp \
+  -p 6881:6881/tcp \
+  -p 6881:6881/udp \
+  -v "$QBT_CONFIG_PATH":/config \
+  -v "$QBT_DOWNLOADS_PATH":/downloads \
+  --restart unless-stopped \
+  qbittorrentofficial/qbittorrent-nox:${QBT_VERSION}
+
+
+
+  docker run -d \
+  --name=qbittorrent \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Europe/Athens \
+  -e WEBUI_PORT=8080 \
+  -e TORRENTING_PORT=6881 \
+  -p 8080:8080 \
+  -p 6881:6881 \
+  -p 6881:6881/udp \
+  -v /home/christos/qbittorrent/config:/config \
+  -v /mnt/omv/Downloads:/downloads \
+  --restart unless-stopped \
+  lscr.io/linuxserver/qbittorrent:latest
