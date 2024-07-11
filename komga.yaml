@@ -1,0 +1,9 @@
+docker run \
+  -d \
+  --name=komga \
+  --user 1000:1000 \
+  -p 25600:25600 \
+  --mount type=bind,source=/home/christos/komga/config,target=/config \
+  --mount type=bind,source=/mnt/omv/Comics,target=/data \
+  --restart unless-stopped \
+  gotson/komga
